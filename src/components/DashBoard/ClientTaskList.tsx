@@ -11,8 +11,10 @@ export default function ClientTaskList() {
         <Spinner animation="border" variant="success" />
       ) : clientTasks.tasksError ? (
         <Alert variant="danger">An error has occurred, try again later!</Alert>
-      ) : (
+      ) : clientTasks.tasks ? (
         clientTasks.tasks.map((task) => <Task taskData={task} view="list" />)
+      ) : (
+        <div>No task found!</div>
       )}
     </div>
   );

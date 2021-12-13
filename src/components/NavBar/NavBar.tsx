@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Form,
-  FormControl,
-  Nav,
-  NavDropdown,
-  Offcanvas,
-  Navbar
-} from "react-bootstrap";
+import { Container, Nav, Offcanvas, Navbar } from "react-bootstrap";
 
 export default function NavBar() {
   return (
