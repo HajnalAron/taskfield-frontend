@@ -1,0 +1,7 @@
+.sideBarOpenMainContainer {
+  width: calc(100vw - 242px);
+}
+
+.sideBarClosedMainContainer {
+  width: calc(100vw - 64px);
+}

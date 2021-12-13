@@ -1,0 +1,12 @@
+.sideBarOpen {
+  width: 242px;
+}
+
+.sideBarClosed {
+  width: 64px;
+}
+
+#sideBarContainer {
+  height: 100vh;
+  background-color: green;
+}
