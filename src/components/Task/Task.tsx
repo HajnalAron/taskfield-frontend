@@ -1,5 +1,4 @@
 import React from "react";
-import { ListGroup } from "react-bootstrap";
 import { Task } from "../../features/tasks/Task";
 import TaskCard from "./TaskCard";
 import TaskListItem from "./TaskListItem";
@@ -9,12 +8,12 @@ interface TaskProps {
   view: "list" | "card";
 }
 
-export default function Task({ taskData, view }: TaskProps) {
+export default function TaskItem({ taskData, view }: TaskProps) {
   return (
     <>
-      <ListGroup>
+      <div>
         {taskData && view === "list" && <TaskListItem taskData={taskData} />}
-      </ListGroup>
+      </div>
       <div>
         {taskData && view === "card" && <TaskCard taskData={taskData} />}
       </div>

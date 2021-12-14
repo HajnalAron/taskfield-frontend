@@ -8,10 +8,10 @@ interface TaskListItemProps {
 }
 
 export default function TaskListItem({ taskData }: TaskListItemProps) {
-  const [collected, drag, dragPreview] = useDrag(() => ({
-    type: "TaskListItem",
-    item: { id: taskData.id }
-  }));
+  // const [collected, drag, dragPreview] = useDrag(() => ({
+  //   type: "TaskListItem",
+  //   item: { id: taskData.id }
+  // }));
   return (
     <ListGroupItem>
       <span>{taskData.name}</span>
@@ -19,7 +19,7 @@ export default function TaskListItem({ taskData }: TaskListItemProps) {
       <span>{taskData.status}</span>
       <span>{taskData.priority}</span>
       <span>{taskData.summary}</span>
-      <span>{taskData.due}</span>
+      <span>{new Date(taskData.due).toLocaleString()}</span>
       <span>{taskData.estimate}</span>
     </ListGroupItem>
   );

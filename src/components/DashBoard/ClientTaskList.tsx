@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { Alert, Spinner } from "react-bootstrap";
+import { Alert, ListGroup, Spinner } from "react-bootstrap";
 import { useAppSelector } from "../../app/hooks";
 import { store } from "../../app/store";
 import { getClientTasks } from "../../features/tasks/tasksSlice";
-import Task from "../Task/Task";
+import TaskItem from "../Task/Task";
 
 export default function ClientTaskList() {
   const clientTasks = useAppSelector((state) => state.tasksSlice);
@@ -17,7 +17,11 @@ export default function ClientTaskList() {
       ) : clientTasks.tasksError ? (
         <Alert variant="danger">An error has occurred, try again later!</Alert>
       ) : clientTasks.tasks ? (
-        clientTasks.tasks.map((task) => <Task taskData={task} view="list" />)
+        <ListGroup>
+          {clientTasks.tasks.map((task) => (
+            <TaskItem key={task.id} taskData={task} view="list" />
+          ))}
+        </ListGroup>
       ) : (
         <div>No task found!</div>
       )}

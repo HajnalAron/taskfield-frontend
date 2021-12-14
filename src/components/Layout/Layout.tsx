@@ -8,7 +8,7 @@ import { getClientWorkspaces } from "../../features/workspaces/workspaceSlice";
 import { getClientOrganizations } from "../../features/organizations/organizationsSlice";
 
 interface LayoutProps {
-  render?: React.ReactNode;
+  render: React.ReactNode;
 }
 
 export default function Layout({ render }: LayoutProps) {
