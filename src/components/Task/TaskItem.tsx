@@ -2,6 +2,7 @@ import React from "react";
 import { Task } from "../../features/tasks/Task";
 import TaskCard from "./TaskCard";
 import TaskListItem from "./TaskListItem";
+import "./taskItem.css";
 
 interface TaskProps {
   taskData: Task;

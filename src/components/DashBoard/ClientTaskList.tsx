@@ -3,7 +3,7 @@ import { Alert, ListGroup, Spinner } from "react-bootstrap";
 import { useAppSelector } from "../../app/hooks";
 import { store } from "../../app/store";
 import { getClientTasks } from "../../features/tasks/tasksSlice";
-import TaskItem from "../Task/Task";
+import TaskItem from "../Task/TaskItem";
 
 export default function ClientTaskList() {
   const clientTasks = useAppSelector((state) => state.tasksSlice);

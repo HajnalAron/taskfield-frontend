@@ -1,7 +1,6 @@
-import React from "react";
 import { Task } from "../../features/tasks/Task";
 import { useDrag } from "react-dnd";
-import { ListGroupItem } from "react-bootstrap";
+import { Col, ListGroupItem, Row } from "react-bootstrap";
 
 interface TaskListItemProps {
   taskData: Task;
@@ -14,13 +13,17 @@ export default function TaskListItem({ taskData }: TaskListItemProps) {
   // }));
   return (
     <ListGroupItem>
-      <span>{taskData.name}</span>
-      <span>{taskData.active}</span>
-      <span>{taskData.status}</span>
-      <span>{taskData.priority}</span>
-      <span>{taskData.summary}</span>
-      <span>{new Date(taskData.due).toLocaleString()}</span>
-      <span>{taskData.estimate}</span>
+      <Row>
+        <Col>{taskData.name}</Col>
+        <Col className="taskListItemData">{taskData.active}</Col>
+        <Col className="taskListItemData">{taskData.status}</Col>
+        <Col className="taskListItemData">{taskData.priority}</Col>
+        <Col className="taskListItemData">{taskData.summary}</Col>
+        <Col className="taskListItemData">
+          {new Date(taskData.due).toLocaleString()}
+        </Col>
+        <Col className="taskListItemData">{taskData.estimate}</Col>
+      </Row>
     </ListGroupItem>
   );
 }
