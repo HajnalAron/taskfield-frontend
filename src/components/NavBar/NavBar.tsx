@@ -4,7 +4,7 @@ import { Container, Nav, Offcanvas, Navbar } from "react-bootstrap";
 export default function NavBar() {
   return (
     <div>
-      <Navbar bg="light" className="w-100" expand={false}>
+      <Navbar className="w-100" expand={false}>
         <Container fluid>
           <Navbar.Brand href="#">NavBar</Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar" />

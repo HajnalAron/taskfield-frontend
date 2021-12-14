@@ -1,3 +1,20 @@
+#sideBarContainer {
+  height: 100vh;
+  background-color: #bffcba;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sideBarMiddleContainer {
+  margin-top: 256px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
 .sideBarOpen {
   width: 242px;
 }
@@ -6,7 +23,7 @@
   width: 64px;
 }
 
-#sideBarContainer {
-  height: 100vh;
-  background-color: #bffcba;
+.sideBarLogo {
+  width: 32px;
+  height: 32px;
 }
