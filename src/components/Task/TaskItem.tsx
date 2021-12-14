@@ -4,12 +4,12 @@ import TaskCard from "./TaskCard";
 import TaskListItem from "./TaskListItem";
 import "./taskItem.css";
 
-interface TaskProps {
+interface TaskItemProps {
   taskData: Task;
   view: "list" | "card";
 }
 
-export default function TaskItem({ taskData, view }: TaskProps) {
+export default function TaskItem({ taskData, view }: TaskItemProps) {
   return (
     <>
       <div>

@@ -1,5 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import "./Sidebar.css";
+import leaf from "../../../assets/leaf-logo.svg";
+import taskfieldLogo from "../../../assets/taskfield-logo.svg";
 
 interface SideBarProps {
   isSideBarExtended: boolean;
@@ -14,24 +16,22 @@ export default function SideBar({
     <>
       {isSideBarExtended ? (
         <div id="sideBarContainer" className="sideBarOpen">
-          <button
+          <img
+            src={taskfieldLogo}
             onClick={() => {
               setExtended(!isSideBarExtended);
             }}
-          >
-            Zar/Nyit
-          </button>
+          />
           SideBar
         </div>
       ) : (
         <div id="sideBarContainer" className="sideBarClosed">
-          <button
+          <img
+            src={leaf}
             onClick={() => {
               setExtended(!isSideBarExtended);
             }}
-          >
-            Zar/Nyit
-          </button>
+          />
           SideBar
         </div>
       )}
