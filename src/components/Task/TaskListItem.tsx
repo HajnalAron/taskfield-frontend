@@ -12,7 +12,7 @@ export default function TaskListItem({ taskData }: TaskListItemProps) {
   //   item: { id: taskData.id }
   // }));
   return (
-    <ListGroupItem>
+    <ListGroupItem className="mb-1">
       <Row>
         <Col>{taskData.name}</Col>
         <Col className="taskListItemData">{taskData.active}</Col>

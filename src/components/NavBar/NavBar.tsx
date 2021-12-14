@@ -12,7 +12,7 @@ export default function NavBar() {
   return (
     <div>
       <Navbar id="navBar" className="w-100" expand={false}>
-        <div className="d-flex w-100 justify-content-between mx-3">
+        <div className="d-flex w-100 justify-content-between">
           {activeWorkSpace !== 0 ? (
             <img
               style={{ visibility: "hidden" }}
@@ -21,7 +21,7 @@ export default function NavBar() {
             />
           ) : (
             <Navbar.Brand href="#">
-              <img className="align-self-center" src={taskfieldLogo} />
+              <img className="align-self-center mt-2" src={taskfieldLogo} />
             </Navbar.Brand>
           )}
           {user ? (

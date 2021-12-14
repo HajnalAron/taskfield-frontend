@@ -26,14 +26,15 @@ export default function SideBar({
       {isSideBarExtended ? (
         <div id="sideBarContainer" className="sideBarOpen">
           <img
+            className="mt-3"
             src={taskfieldLogo}
             onClick={() => {
               setExtended(!isSideBarExtended);
             }}
           />
-          <div className="sideBarMiddleContainer">
+          <div className="sideBarMiddleContainer text-center">
             <div>
-              <img className="sideBarLogo" src={projectTasksLogo} />
+              <img className="sideBarLogo " src={projectTasksLogo} />
               <div>Tasks</div>
             </div>
             <div>

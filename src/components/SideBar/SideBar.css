@@ -1,6 +1,13 @@
 #sideBarContainer {
   height: 100vh;
-  background-color: #bffcba;
+  background: rgb(84, 139, 96);
+  background: linear-gradient(
+    180deg,
+    rgba(84, 139, 96, 1) 0%,
+    rgba(114, 171, 123, 1) 21%,
+    rgba(130, 188, 135, 1) 31%,
+    rgba(191, 252, 186, 1) 100%
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,10 +24,12 @@
 
 .sideBarOpen {
   width: 242px;
+  transition: ease 0.3s, top ease 0.3s 0.3s, transform ease;
 }
 
 .sideBarClosed {
   width: 64px;
+  transition: ease 0.3s, top ease 0.3s 0.3s, transform ease;
 }
 
 .sideBarLogo {

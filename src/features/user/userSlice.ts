@@ -19,7 +19,7 @@ const initialState: UserState = {
   },
   userError: false,
   isUserLoading: false,
-  activeWorkSpace: 0
+  activeWorkSpace: 1
 };
 
 export const getClientUserData = createAsyncThunk<User>(
