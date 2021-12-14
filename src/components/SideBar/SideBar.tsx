@@ -5,6 +5,7 @@ import taskfieldLogo from "../../../assets/taskfield-logo.svg";
 import userLogo from "../../../assets/user_logo.svg";
 import settingsLogo from "../../../assets/settings_logo.svg";
 import projectTasksLogo from "../../../assets/project_tasks_logo.svg";
+import { useAppSelector } from "../../app/hooks";
 
 interface SideBarProps {
   isSideBarExtended: boolean;
@@ -15,8 +16,13 @@ export default function SideBar({
   isSideBarExtended,
   setExtended
 }: SideBarProps) {
-  return (
-    <>
+  const activeWorkSpace = useAppSelector(
+    (state) => state.userSlice.activeWorkSpace
+  );
+  return activeWorkSpace === 0 ? (
+    <></>
+  ) : (
+    <div>
       {isSideBarExtended ? (
         <div id="sideBarContainer" className="sideBarOpen">
           <img
@@ -25,6 +31,20 @@ export default function SideBar({
               setExtended(!isSideBarExtended);
             }}
           />
+          <div className="sideBarMiddleContainer">
+            <div>
+              <img className="sideBarLogo" src={projectTasksLogo} />
+              <div>Tasks</div>
+            </div>
+            <div>
+              <img className="sideBarLogo" src={userLogo} />
+              <div>People</div>
+            </div>
+            <div>
+              <img className="sideBarLogo" src={settingsLogo} />
+              <div>Project Settings</div>
+            </div>
+          </div>
         </div>
       ) : (
         <div id="sideBarContainer" className="sideBarClosed">
@@ -42,6 +62,6 @@ export default function SideBar({
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

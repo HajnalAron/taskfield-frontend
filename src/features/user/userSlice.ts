@@ -5,6 +5,7 @@ export interface UserState {
   userData: User;
   userError: boolean;
   isUserLoading: boolean;
+  activeWorkSpace: number;
 }
 
 const initialState: UserState = {
@@ -17,7 +18,8 @@ const initialState: UserState = {
     role: "user"
   },
   userError: false,
-  isUserLoading: false
+  isUserLoading: false,
+  activeWorkSpace: 0
 };
 
 export const getClientUserData = createAsyncThunk<User>(
@@ -42,13 +44,17 @@ export const getClientUserData = createAsyncThunk<User>(
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setActiveWorkSpace: (state, action: PayloadAction<number>) => {
+      state.activeWorkSpace = action.payload;
+    }
+  },
   extraReducers: (builder) => {
-    builder.addCase(getClientUserData.pending, (state, action) => {
+    builder.addCase(getClientUserData.pending, (state) => {
       state.isUserLoading = true;
     });
 
-    builder.addCase(getClientUserData.rejected, (state, action) => {
+    builder.addCase(getClientUserData.rejected, (state) => {
       state.userError = true;
       state.isUserLoading = false;
     });

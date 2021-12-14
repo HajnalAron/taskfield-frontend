@@ -6,6 +6,7 @@ import { getClientUserData } from "../../features/user/userSlice";
 import { store } from "../../app/store";
 import { getClientWorkspaces } from "../../features/workspaces/workspaceSlice";
 import { getClientOrganizations } from "../../features/organizations/organizationsSlice";
+import { useAppSelector } from "../../app/hooks";
 
 interface LayoutProps {
   render: React.ReactNode;
@@ -13,6 +14,9 @@ interface LayoutProps {
 
 export default function Layout({ render }: LayoutProps) {
   const [isSideBarExtended, setSideBarExtended] = useState(false);
+  const activeWorkSpace = useAppSelector(
+    (state) => state.userSlice.activeWorkSpace
+  );
 
   useEffect(() => {
     store.dispatch(getClientWorkspaces());
@@ -28,17 +32,20 @@ export default function Layout({ render }: LayoutProps) {
           setSideBarExtended(!isSideBarExtended);
         }}
       />
-      {isSideBarExtended ? (
+      {activeWorkSpace === 0 ? (
+        <div className="sideBarHiddenMainContainer">
+          <Navbar />
+          <div id="workArea">{render}</div>
+        </div>
+      ) : isSideBarExtended ? (
         <div className="sideBarOpenMainContainer">
           <Navbar />
-          <div>test</div>
-          {render}
+          <div id="workArea">{render}</div>
         </div>
       ) : (
         <div className="sideBarClosedMainContainer">
           <Navbar />
-          <div>test</div>
-          {render}
+          <div id="workArea">{render}</div>
         </div>
       )}
     </div>

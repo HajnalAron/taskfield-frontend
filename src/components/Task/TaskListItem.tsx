@@ -18,7 +18,6 @@ export default function TaskListItem({ taskData }: TaskListItemProps) {
         <Col className="taskListItemData">{taskData.active}</Col>
         <Col className="taskListItemData">{taskData.status}</Col>
         <Col className="taskListItemData">{taskData.priority}</Col>
-        <Col className="taskListItemData">{taskData.summary}</Col>
         <Col className="taskListItemData">
           {new Date(taskData.due).toLocaleString()}
         </Col>
