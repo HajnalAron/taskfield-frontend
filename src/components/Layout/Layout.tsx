@@ -6,7 +6,6 @@ import { getClientUserData } from "../../features/user/userSlice";
 import { store } from "../../app/store";
 import { getClientWorkspaces } from "../../features/workspaces/workspaceSlice";
 import { getClientOrganizations } from "../../features/organizations/organizationsSlice";
-import { getClientTasks } from "../../features/tasks/tasksSlice";
 
 interface LayoutProps {
   render?: React.ReactNode;
@@ -19,7 +18,6 @@ export default function Layout({ render }: LayoutProps) {
     store.dispatch(getClientWorkspaces());
     store.dispatch(getClientOrganizations());
     store.dispatch(getClientUserData());
-    store.dispatch(getClientTasks());
   }, []);
 
   return (
