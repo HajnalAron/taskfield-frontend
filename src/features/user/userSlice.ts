@@ -19,7 +19,7 @@ const initialState: UserState = {
   },
   userError: false,
   isUserLoading: false,
-  activeWorkSpace: 1
+  activeWorkSpace: 0
 };
 
 export const getClientUserData = createAsyncThunk<User>(
@@ -66,6 +66,6 @@ export const userSlice = createSlice({
   }
 });
 
-export const {} = userSlice.actions;
+export const { setActiveWorkSpace } = userSlice.actions;
 
 export default userSlice.reducer;

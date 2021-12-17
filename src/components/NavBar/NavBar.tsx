@@ -3,6 +3,7 @@ import { Container, Nav, Offcanvas, Navbar } from "react-bootstrap";
 import { useAppSelector } from "../../app/hooks";
 import taskfieldLogo from "../../../assets/taskfield_logo_black.svg";
 import "./NavBar.css";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
   const activeWorkSpace = useAppSelector(
@@ -21,9 +22,10 @@ export default function NavBar() {
             />
           ) : (
             <Navbar.Brand href="#">
-              <img className="align-self-center mt-2" src={taskfieldLogo} />
+              <img src={taskfieldLogo} />
             </Navbar.Brand>
           )}
+          <Link to="/dashboard">My dashboard</Link>
           {user ? (
             <img id="navBarProfilePicture" src={user.avatar} />
           ) : (

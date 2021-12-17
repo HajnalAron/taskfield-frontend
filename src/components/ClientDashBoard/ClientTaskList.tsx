@@ -12,6 +12,7 @@ export default function ClientTaskList() {
   }, []);
   return (
     <div>
+      <h3>Tasks</h3>
       {clientTasks.isTasksLoading ? (
         <Spinner animation="border" variant="success" />
       ) : clientTasks.tasksError ? (

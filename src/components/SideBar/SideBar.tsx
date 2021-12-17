@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "./Sidebar.css";
 import leaf from "../../../assets/leaf-logo.svg";
 import taskfieldLogo from "../../../assets/taskfield-logo.svg";
@@ -6,6 +6,8 @@ import userLogo from "../../../assets/user_logo.svg";
 import settingsLogo from "../../../assets/settings_logo.svg";
 import projectTasksLogo from "../../../assets/project_tasks_logo.svg";
 import { useAppSelector } from "../../app/hooks";
+import { Workspace } from "../../features/workspaces/Workspace";
+import axios from "axios";
 
 interface SideBarProps {
   isSideBarExtended: boolean;
@@ -19,6 +21,27 @@ export default function SideBar({
   const activeWorkSpace = useAppSelector(
     (state) => state.userSlice.activeWorkSpace
   );
+
+  const [activeWorkspaceData, setActiveWorkspaceData] = useState<Workspace>();
+
+  useEffect(() => {
+    if (activeWorkSpace !== 0) {
+      const getWorkspaceData = async () => {
+        try {
+          const response = await axios.get(
+            import.meta.env.VITE_APP_BACKEND_URL +
+              "/workspaces/" +
+              activeWorkSpace
+          );
+          setActiveWorkspaceData(response.data as Workspace);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getWorkspaceData();
+    }
+  }, [activeWorkSpace]);
+
   return activeWorkSpace === 0 ? (
     <></>
   ) : (
@@ -32,10 +55,11 @@ export default function SideBar({
               setExtended(!isSideBarExtended);
             }}
           />
+          <h3 className="sideBarProjectName">{activeWorkspaceData!.name}</h3>
           <div className="sideBarMiddleContainer text-center">
             <div>
               <img className="sideBarLogo " src={projectTasksLogo} />
-              <div>Tasks</div>
+              <div>Dashboard</div>
             </div>
             <div>
               <img className="sideBarLogo" src={userLogo} />

@@ -9,11 +9,13 @@ interface WorkSpaceCardProps {
 
 export default function WorkspaceCard({ workspaceData }: WorkSpaceCardProps) {
   return (
-    <Card>
+    <Card key={workspaceData.id} style={{ maxWidth: "256px" }}>
       <Card.Body>
         <Card.Title>{workspaceData.name}</Card.Title>
-        <Card.Text>Number of open tasks:</Card.Text>
-        <Link to={`/workspaces/${workspaceData.id}`}>Visit workspace</Link>
+        {/* <Card.Text>Number of open tasks:</Card.Text> */}
+        <Link to={`/workspaces/${workspaceData.id}/dashboard`}>
+          Visit workspace
+        </Link>
       </Card.Body>
     </Card>
   );

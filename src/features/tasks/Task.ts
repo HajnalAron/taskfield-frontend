@@ -1,3 +1,5 @@
+import { User } from "../user/User";
+
 export interface Task {
   id: number;
   workspaceId: number;
@@ -8,4 +10,20 @@ export interface Task {
   active: "open" | "closed";
   estimate: string;
   due: Date;
+}
+
+export interface TaskComment {
+  id: number;
+  text: string;
+  media?: string;
+  createdAt: Date;
+  taskId: number;
+  userId: number;
+  user: User;
+}
+
+export interface TaskAttachment {
+  id: number;
+  link: string;
+  taskId: string;
 }

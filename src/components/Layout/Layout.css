@@ -1,19 +1,26 @@
 .sideBarOpenMainContainer {
   width: calc(100vw - 242px);
   background-color: #f4f4f4;
+  transition: ease 0.3s, top ease 0.3s 0.3s, transform ease;
 }
 
 .sideBarClosedMainContainer {
   width: calc(100vw - 64px);
   background-color: #f4f4f4;
+  transition: ease 0.3s, top ease 0.3s 0.3s, transform ease;
 }
 
 .sideBarHiddenMainContainer {
   width: 100%;
   background-color: #f4f4f4;
+  transition: ease 0.3s, top ease 0.3s 0.3s, transform ease;
 }
 
 #workArea {
+  min-height: calc(100vh - 128px);
+  border-radius: 10px;
   margin: 32px;
+  display: flex;
+  min-width: calc(100vw - 320px);
   background-color: white;
 }
