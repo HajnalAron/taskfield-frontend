@@ -10,8 +10,15 @@ export interface Task {
   active: "open" | "closed";
   estimate: string;
   due: Date;
+  categories?: Category[];
 }
 
+interface Category {
+  id: number;
+  text: string;
+  color: string;
+  taskId: string;
+}
 export interface TaskComment {
   id: number;
   text: string;

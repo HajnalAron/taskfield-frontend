@@ -19,7 +19,7 @@ export default function SingleComment({ commentData }: SingleCommentProps) {
   const user = useAppSelector((state) => state.userSlice);
   return (
     <div>
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column mt-2">
         <div className="comment">{commentData.text}</div>
         <div className="d-flex mt-2">
           <img

@@ -18,20 +18,20 @@ export default function SideBar({
   isSideBarExtended,
   setExtended
 }: SideBarProps) {
-  const activeWorkSpace = useAppSelector(
-    (state) => state.userSlice.activeWorkSpace
+  const activeWorkspace = useAppSelector(
+    (state) => state.userSlice.activeWorkspace
   );
 
   const [activeWorkspaceData, setActiveWorkspaceData] = useState<Workspace>();
 
   useEffect(() => {
-    if (activeWorkSpace !== 0) {
+    if (activeWorkspace !== 0) {
       const getWorkspaceData = async () => {
         try {
           const response = await axios.get(
             import.meta.env.VITE_APP_BACKEND_URL +
               "/workspaces/" +
-              activeWorkSpace
+              activeWorkspace
           );
           setActiveWorkspaceData(response.data as Workspace);
         } catch (error) {
@@ -40,9 +40,9 @@ export default function SideBar({
       };
       getWorkspaceData();
     }
-  }, [activeWorkSpace]);
+  }, [activeWorkspace]);
 
-  return activeWorkSpace === 0 ? (
+  return activeWorkspace === 0 ? (
     <></>
   ) : (
     <div>

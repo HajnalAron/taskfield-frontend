@@ -13,21 +13,27 @@ interface NewTaskModalProps {
 }
 
 function TaskDetailsModal(props: NewTaskModalProps) {
+  const [categoryColor, setCategoryColor] = useState("");
+  const [categoryText, setCategoryText] = useState("");
+  const { onHide, show, taskdata } = props;
   const [taskAttachments, setTaskAttachments] = useState<TaskAttachment[]>([]);
 
-  const getTaskAttachments = async (id: number) => {
+  const createCategory = async (id: string, text: string, color: string) => {
     try {
-      const response = await axios.get(
-        import.meta.env.VITE_APP_BACKEND_URL + "/attachments/" + id
+      const request = await axios.post(
+        import.meta.env.VITE_APP_BACKEND_URL + "/categories/" + id,
+        {
+          text,
+          color
+        }
       );
-      setTaskAttachments(response.data as TaskAttachment[]);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
   useEffect(() => {
-    getTaskAttachments(props.taskdata.id);
+    // getTaskAttachments(taskdata.id);
   }, []);
 
   return (
@@ -39,16 +45,29 @@ function TaskDetailsModal(props: NewTaskModalProps) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {props.taskdata.name}
+          {taskdata.name}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <TaskComments taskData={props.taskdata} />
+        <input
+          type={"color"}
+          onChange={(e) => {
+            setCategoryColor(e.target.value);
+          }}
+        />
+        <input
+          type="text"
+          onChange={(e) => {
+            setCategoryText(e.target.value);
+          }}
+        />
+        <div>{taskdata.summary}</div>
+        <TaskComments taskData={taskdata} />
       </Modal.Body>
       <Modal.Footer>
         <Button
           onClick={() => {
-            props.onHide(!props.show);
+            props.onHide(!show);
           }}
         >
           Close

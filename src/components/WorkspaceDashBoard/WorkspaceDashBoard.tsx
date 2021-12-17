@@ -3,32 +3,26 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { store } from "../../app/store";
 import { Task } from "../../features/tasks/Task";
-import { setActiveWorkSpace } from "../../features/user/userSlice";
+import {
+  getActiveWorkspaceTasks,
+  setActiveWorkSpace
+} from "../../features/user/userSlice";
 
 export default function WorkspaceDashBoard() {
   let workspaceId = useParams().workspaceId;
   const dispatch = useAppDispatch();
-  const [workspaceTasks, setWorkspaceTasks] = useState<Task[]>([]);
+  const workSpaceTasks = useAppSelector(
+    (state) => state.userSlice.activeWorkspaceTasks
+  );
 
   useEffect(() => {
     dispatch(setActiveWorkSpace(parseInt(workspaceId!)));
   }, []);
 
   useEffect(() => {
-    const getWorkspaceTasks = async (workspaceId: string) => {
-      try {
-        const response = await axios.get(
-          import.meta.env.VITE_APP_BACKEND_URL +
-            "/tasks/workspace/" +
-            workspaceId
-        );
-        setWorkspaceTasks(response.data as Task[]);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getWorkspaceTasks(workspaceId!);
+    store.dispatch(getActiveWorkspaceTasks());
   }, [workspaceId]);
 
   return (

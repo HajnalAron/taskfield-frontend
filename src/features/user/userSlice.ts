@@ -1,11 +1,17 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { useAppSelector } from "../../app/hooks";
+import { Task } from "../tasks/Task";
+import { Workspace } from "../workspaces/Workspace";
 import { User } from "./User";
 
 export interface UserState {
   userData: User;
   userError: boolean;
   isUserLoading: boolean;
-  activeWorkSpace: number;
+  activeWorkspace: number;
+  activeWorkspaceTasks: Task[];
+  isActiveWorkspaceError: boolean;
+  isActiveWorkspaceLoading: boolean;
 }
 
 const initialState: UserState = {
@@ -19,8 +25,35 @@ const initialState: UserState = {
   },
   userError: false,
   isUserLoading: false,
-  activeWorkSpace: 0
+  activeWorkspace: 0,
+  activeWorkspaceTasks: [],
+  isActiveWorkspaceError: false,
+  isActiveWorkspaceLoading: true
 };
+
+export const getActiveWorkspaceTasks = createAsyncThunk<Task[]>(
+  "user/getActiveWorkspaceTasks",
+  async (_, thunkApi) => {
+    const activeWorkSpace = useAppSelector(
+      (state) => state.userSlice.activeWorkspace
+    );
+    const response = await fetch(
+      import.meta.env.VITE_APP_BACKEND_URL +
+        "/tasks/workspace/" +
+        activeWorkSpace,
+      {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.getItem("accessToken")!
+        }
+      }
+    );
+    if (!response.ok) {
+      return thunkApi.rejectWithValue(await response.json());
+    }
+    return (await response.json()) as Task[];
+  }
+);
 
 export const getClientUserData = createAsyncThunk<User>(
   "user/getClientUserData",
@@ -46,7 +79,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setActiveWorkSpace: (state, action: PayloadAction<number>) => {
-      state.activeWorkSpace = action.payload;
+      state.activeWorkspace = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -62,6 +95,19 @@ export const userSlice = createSlice({
     builder.addCase(getClientUserData.fulfilled, (state, action) => {
       state.isUserLoading = false;
       state.userData = action.payload;
+    });
+    builder.addCase(getActiveWorkspaceTasks.pending, (state) => {
+      state.isActiveWorkspaceLoading = true;
+    });
+
+    builder.addCase(getActiveWorkspaceTasks.rejected, (state) => {
+      state.isActiveWorkspaceError = true;
+      state.isActiveWorkspaceLoading = false;
+    });
+
+    builder.addCase(getActiveWorkspaceTasks.fulfilled, (state, action) => {
+      state.isActiveWorkspaceLoading = false;
+      state.activeWorkspaceTasks = action.payload;
     });
   }
 });

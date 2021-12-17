@@ -15,7 +15,7 @@ interface LayoutProps {
 export default function Layout({ render }: LayoutProps) {
   const [isSideBarExtended, setSideBarExtended] = useState(false);
   const activeWorkSpace = useAppSelector(
-    (state) => state.userSlice.activeWorkSpace
+    (state) => state.userSlice.activeWorkspace
   );
 
   useEffect(() => {

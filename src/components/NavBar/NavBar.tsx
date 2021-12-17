@@ -6,15 +6,15 @@ import "./NavBar.css";
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
-  const activeWorkSpace = useAppSelector(
-    (state) => state.userSlice.activeWorkSpace
+  const activeWorkspace = useAppSelector(
+    (state) => state.userSlice.activeWorkspace
   );
   const user = useAppSelector((state) => state.userSlice.userData);
   return (
     <div>
       <Navbar id="navBar" className="w-100" expand={false}>
         <div className="d-flex w-100 justify-content-between">
-          {activeWorkSpace !== 0 ? (
+          {activeWorkspace !== 0 ? (
             <img
               style={{ visibility: "hidden" }}
               className="align-self-center"
