@@ -21,6 +21,9 @@ import MessageBoard from "./MessageBoard";
 export default function WorkspaceDashBoard() {
   let workspaceId = useParams().workspaceId;
   const dispatch = useAppDispatch();
+  const currentClientId = useAppSelector(
+    (state) => state.userSlice.userData.id
+  );
   const workSpaceTasks = useAppSelector(
     (state) => state.userSlice.activeWorkspaceTasks
   );
@@ -78,29 +81,25 @@ export default function WorkspaceDashBoard() {
 
   return (
     <div className="w-100">
-      <h1 className="text-center"></h1>
-      <h1 className="fw-bold">{workspaceData?.name}</h1>
       <Container className="w-100" fluid>
         <Row>
-          <Col
-            className="dashboardSmallContainer d-flex justify-content-center"
-            xs={6}
-          >
-            <h3>Workspace Details</h3>
-
-            <img src={workspaceData?.logo} />
+          <Col className="dashboardSmallContainer d-flex" xs={6}>
             <div>
               <div className="fw-bold">Members:</div>
-              {workspaceMembers?.map((member) => (
-                <div className="m-3">
-                  <img src={member.avatar} />
-                  <div>
-                    {member.surname} {member.firstname}
+              {workspaceMembers?.map((member) =>
+                member.id != currentClientId ? (
+                  <div className="m-3">
+                    <img src={member.avatar} />
+                    <div>
+                      {member.surname} {member.firstname}
+                    </div>
+                    <div>{member.email}</div>
+                    <Button>Contact</Button>
                   </div>
-                  <div>{member.email}</div>
-                  <Button>Contact</Button>
-                </div>
-              ))}
+                ) : (
+                  <></>
+                )
+              )}
             </div>
           </Col>
           <Col className="dashboardSmallContainer" xs={6}>
@@ -112,7 +111,7 @@ export default function WorkspaceDashBoard() {
               <h3>Tasks</h3>
               {workspaceData && <NewTask workspaceData={workspaceData!} />}
             </div>
-            <div>
+            <div style={{ overflowY: "scroll", maxHeight: "35vh" }}>
               {workSpaceTasks ? (
                 workSpaceTasks.map((t) => (
                   <TaskItem key={t.id} taskData={t} view="list" />
