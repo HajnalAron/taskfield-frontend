@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { useAppSelector } from "../../app/hooks";
 import { socket } from "../../features/socket";
-import { Message } from "../../features/user/userSlice";
 import SingleMessage from "./SingleMessage";
 
 export default function MessageBoard() {
@@ -20,6 +19,7 @@ export default function MessageBoard() {
       workspaceId: clientData.activeWorkspace,
       userId: clientData.userData.id
     });
+    setNewMessageText("");
   };
 
   return (

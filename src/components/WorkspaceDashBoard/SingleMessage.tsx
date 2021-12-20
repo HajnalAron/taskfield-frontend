@@ -30,6 +30,12 @@ export default function SingleMessage({ messageData }: SingleMessageProps) {
         </div>
       ) : (
         <div className="notMyMessage">
+          <div
+            className="mb-2 d-flex align-items-center"
+            style={{ gap: "8px" }}
+          >
+            <img src={messageData.user.avatar} width={"32px"} />
+          </div>
           <div>{messageData.text}</div>
           <div className="date">
             {new Date(messageData.createdAt).toLocaleString()}
