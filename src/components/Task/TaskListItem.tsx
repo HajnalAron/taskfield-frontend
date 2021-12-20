@@ -43,7 +43,7 @@ const returnActive = (active: string) => {
       );
     case "closed":
       return (
-        <Badge bg="dark" text="dark">
+        <Badge bg="dark" text="white">
           Closed
         </Badge>
       );
