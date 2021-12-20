@@ -14,7 +14,7 @@ export default function OrganizationCard({
     <Card key={organizationData.id} style={{ maxWidth: "256px" }}>
       <Card.Body>
         <Card.Title>{organizationData.name}</Card.Title>
-        <Card.Text>Number of open tasks for you:</Card.Text>
+        <Card.Text>Number of open tasks for you:1</Card.Text>
         <Link to={`/organizations/${organizationData.id}/dashboard`}>
           Visit organization
         </Link>
