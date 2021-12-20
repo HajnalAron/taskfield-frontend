@@ -30,9 +30,10 @@ export default function Login() {
 
   return (
     <div className="loggin-cont">
-      <img src={taskfieldLogo} />
-      <div className="content-loggin-cont">
-        <h1 className="loggin-header py-4">LOGIN</h1>
+      <div className="content-loggin-cont text-center">
+        <div className="loggin-header py-4">
+          <img src={taskfieldLogo} />
+        </div>
         <Form
           onSubmit={(e) => {
             handleSubmit(e);
