@@ -66,6 +66,8 @@ export default function WorkspaceDashBoard() {
         <Row>
           <Col className="dashboardSmallContainer" xs={6}>
             <h3>Workspace Details</h3>
+            <div className="fw-bold">{workspaceData?.name}</div>
+            <img src={workspaceData?.logo} />
           </Col>
           <Col className="dashboardSmallContainer" xs={6}>
             <h3>Message Board</h3>

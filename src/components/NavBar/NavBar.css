@@ -5,7 +5,12 @@
 }
 
 #navBarProfilePicture {
+  margin-top: 4px;
   margin-right: 32px;
   width: 48px;
   height: 48px;
+}
+
+.navLink {
+  text-decoration: none;
 }

@@ -4,6 +4,10 @@
   transition: ease 0.3s, top ease 0.3s 0.3s, transform ease;
 }
 
+body {
+  font-family: sans-serif;
+}
+
 .sideBarClosedMainContainer {
   width: calc(100vw - 64px);
   background-color: #f4f4f4;
