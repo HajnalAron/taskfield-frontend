@@ -1,0 +1,43 @@
+.loggin-cont {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d9dbd5;
+}
+
+.content-loggin-cont {
+  width: 25rem;
+  height: fit-content;
+  background-color: #ffffff;
+  border: solid 1px rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 5px 5px 10px #b4b6b0a9;
+}
+
+.log-in-btn.btn.btn-primary,
+.OAuth-btn.btn.btn-primary {
+  background-color: #009688;
+  border: solid 1px #009688;
+  width: 100%;
+}
+
+.form-check-input {
+  background-color: #009688;
+}
+
+h1.loggin-header {
+  text-align: center;
+  font-size: 2rem;
+}
+
+a.link-register {
+  color: #676e72;
+}
+
+p.not-a-member-p,
+p.parag-login {
+  text-align: center;
+}

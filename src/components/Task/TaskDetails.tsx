@@ -143,7 +143,7 @@ function TaskDetailsModal(props: NewTaskModalProps) {
             >
               Add Category
             </Button> */}
-            <div>{taskdata.summary}</div>
+            <div className="my-3">Task Summary: {taskdata.summary}</div>
             <TaskComments taskData={taskdata} />
           </Modal.Body>
           <Modal.Footer className="d-flex justify-content-between">
