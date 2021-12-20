@@ -87,26 +87,27 @@ export default function TaskListItem({ taskData }: TaskListItemProps) {
   return (
     <ListGroupItem
       className="mb-1 text-center"
-      style={{ borderRadius: "10px" }}
+      style={{ borderRadius: "10px", backgroundColor: "#D9F8D7" }}
     >
       <Row>
-        <Col className="fw-bold">{taskData.name}</Col>
+        <Col className="fw-bold d-flex align-items-center">
+          <div>{taskData.name}</div>
+        </Col>
         <TaskDetails taskData={taskData} />
         <Col className="taskListItemData">{returnActive(taskData.active)}</Col>
         <Col className="taskListItemData">{returnStatus(taskData.status)}</Col>
         <Col className="taskListItemData">
           {returnPriority(taskData.priority)}
         </Col>
-        <Col>
-          <div className="d-flex" style={{ gap: "4px" }}>
-            {taskData.categories ? (
-              taskData.categories.map((c) => (
-                <TaskBadge key={c.id} color={c.color} text={c.text} />
-              ))
-            ) : (
-              <></>
-            )}
-          </div>
+
+        <Col className="d-flex align-items-center" style={{ gap: "4px" }}>
+          {taskData.categories ? (
+            taskData.categories.map((c) => (
+              <TaskBadge key={c.id} color={c.color} text={c.text} />
+            ))
+          ) : (
+            <></>
+          )}
         </Col>
         <Col className="taskListItemData">
           Due to: {new Date(taskData.due).toLocaleString()}

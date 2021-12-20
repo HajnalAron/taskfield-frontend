@@ -100,6 +100,22 @@ function TaskDetailsModal(props: NewTaskModalProps) {
             </div>
           </Modal.Header>
           <Modal.Body>
+            <div className="my-3">Task Summary: {taskdata.summary}</div>
+            <hr></hr>
+            <TaskComments taskData={taskdata} />
+          </Modal.Body>
+          <Modal.Footer className="d-flex justify-content-between">
+            <div className="d-flex" style={{ gap: "4px" }}>
+              <Button variant="info">Edit Task</Button>
+              <Button
+                onClick={() => {
+                  deleteTask();
+                }}
+                variant="danger"
+              >
+                Delete Task
+              </Button>
+            </div>
             <InputGroup className="my-4 w-50">
               <FormControl
                 style={{ maxWidth: "40px" }}
@@ -127,37 +143,6 @@ function TaskDetailsModal(props: NewTaskModalProps) {
                 Add Category
               </Button>
             </InputGroup>
-            {/* <input
-              
-            />
-            <input
-              type="text"
-              onChange={(e) => {
-                setCategoryText(e.target.value);
-              }}
-            />
-            <Button
-              onClick={() => {
-                createCategory();
-              }}
-            >
-              Add Category
-            </Button> */}
-            <div className="my-3">Task Summary: {taskdata.summary}</div>
-            <TaskComments taskData={taskdata} />
-          </Modal.Body>
-          <Modal.Footer className="d-flex justify-content-between">
-            <div className="d-flex" style={{ gap: "4px" }}>
-              <Button variant="info">Edit Task</Button>
-              <Button
-                onClick={() => {
-                  deleteTask();
-                }}
-                variant="danger"
-              >
-                Delete Task
-              </Button>
-            </div>
             <Button
               onClick={() => {
                 props.onHide(!show);

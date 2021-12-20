@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { workerData } from "worker_threads";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { store } from "../../app/store";
 import { socket } from "../../features/socket";
 import { Task } from "../../features/tasks/Task";
+import { User } from "../../features/user/User";
 import {
   getActiveWorkspaceMessages,
   getActiveWorkspaceTasks,
@@ -23,8 +24,23 @@ export default function WorkspaceDashBoard() {
   const workSpaceTasks = useAppSelector(
     (state) => state.userSlice.activeWorkspaceTasks
   );
-  // const [workSpaceTasks, setWorkspaceTasks] = useState<Task[]>()
+  const [workspaceMembers, setWorkspaceMembers] = useState<User[]>();
   const [workspaceData, setWorkspaceData] = useState<Workspace>();
+
+  const getWorkspaceMembers = async () => {
+    try {
+      const response = await axios.get(
+        import.meta.env.VITE_APP_BACKEND_URL +
+          "/workspaces/users/" +
+          workspaceId
+      );
+      if (response.status === 200) {
+        setWorkspaceMembers(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getWorkSpaceData = async () => {
     try {
@@ -56,18 +72,36 @@ export default function WorkspaceDashBoard() {
 
   useEffect(() => {
     getWorkSpaceData();
+    getWorkspaceMembers();
     store.dispatch(getActiveWorkspaceTasks(1));
   }, [workspaceId]);
 
   return (
     <div className="w-100">
       <h1 className="text-center"></h1>
+      <h1 className="fw-bold">{workspaceData?.name}</h1>
       <Container className="w-100" fluid>
         <Row>
-          <Col className="dashboardSmallContainer" xs={6}>
+          <Col
+            className="dashboardSmallContainer d-flex justify-content-center"
+            xs={6}
+          >
             <h3>Workspace Details</h3>
-            <div className="fw-bold">{workspaceData?.name}</div>
+
             <img src={workspaceData?.logo} />
+            <div>
+              <div className="fw-bold">Members:</div>
+              {workspaceMembers?.map((member) => (
+                <div className="m-3">
+                  <img src={member.avatar} />
+                  <div>
+                    {member.surname} {member.firstname}
+                  </div>
+                  <div>{member.email}</div>
+                  <Button>Contact</Button>
+                </div>
+              ))}
+            </div>
           </Col>
           <Col className="dashboardSmallContainer" xs={6}>
             <h3>Message Board</h3>
