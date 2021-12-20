@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import "./Sidebar.css";
+import "./SideBar.css";
 import leaf from "../../../assets/leaf-logo.svg";
 import taskfieldLogo from "../../../assets/taskfield-logo.svg";
 import userLogo from "../../../assets/user_logo.svg";
