@@ -24,3 +24,25 @@
   min-width: calc(100vw - 320px);
   background-color: white;
 }
+
+.btn-primary {
+  background-color: #548b60 !important;
+  border-color: #548b60 !important;
+}
+
+.btn-primary:active {
+  box-shadow: 0 0 0 0.25rem #6ab37a !important;
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 0.25rem #6ab37a !important;
+}
+
+.messageArea {
+  background-color: #f4f4f4;
+  max-height: 33vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}

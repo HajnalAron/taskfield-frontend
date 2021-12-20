@@ -25,6 +25,7 @@ export default function DashBoard() {
       <h1 className="text-center">
         {user.userData.firstname} {user.userData.surname + "'s Dashboard"}
       </h1>
+      <hr></hr>
       <Container className="w-100" fluid>
         <Row>
           <Col className="dashboardSmallContainer" xs={6}>
@@ -36,6 +37,7 @@ export default function DashBoard() {
             <ClientOrganizations />
           </Col>
           <Col xs={12}>
+            <hr></hr>
             <ClientTaskList />
           </Col>
         </Row>

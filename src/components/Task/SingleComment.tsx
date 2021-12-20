@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { User } from "../../features/user/User";
 import "./SingleComment.css";
@@ -13,10 +14,27 @@ interface SingleCommentProps {
     userId: number;
     user: User;
   };
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function SingleComment({ commentData }: SingleCommentProps) {
+export default function SingleComment({
+  commentData,
+  setLoading
+}: SingleCommentProps) {
   const user = useAppSelector((state) => state.userSlice);
+
+  const deleteComment = async () => {
+    try {
+      const request = await axios.delete(
+        import.meta.env.VITE_APP_BACKEND_URL +
+          `/comments/${commentData.taskId}/${commentData.id}`
+      );
+      if (request.status === 204) {
+        setLoading(true);
+      }
+    } catch (error) {}
+  };
+
   return (
     <div>
       <div className="d-flex flex-column mt-2">
@@ -40,6 +58,9 @@ export default function SingleComment({ commentData }: SingleCommentProps) {
             {commentData.user.id === user.userData.id ? (
               <div className="d-flex">
                 <div
+                  onClick={() => {
+                    deleteComment();
+                  }}
                   style={{
                     fontSize: "12px",
                     marginLeft: "8px"

@@ -4,6 +4,14 @@ import { Task } from "../tasks/Task";
 import { Workspace } from "../workspaces/Workspace";
 import { User } from "./User";
 
+export interface Message {
+  id: number;
+  text: string;
+  workspaceId: number;
+  userId: number;
+  createdAt: Date;
+  user: User;
+}
 export interface UserState {
   userData: User;
   userError: boolean;
@@ -12,6 +20,9 @@ export interface UserState {
   activeWorkspaceTasks: Task[];
   isActiveWorkspaceError: boolean;
   isActiveWorkspaceLoading: boolean;
+  activeWorkspaceMessages: Message[];
+  isActiveWorkspaceMessagesLoading: boolean;
+  isActiveWorkspaceMessagesError: boolean;
 }
 
 const initialState: UserState = {
@@ -28,19 +39,17 @@ const initialState: UserState = {
   activeWorkspace: 0,
   activeWorkspaceTasks: [],
   isActiveWorkspaceError: false,
-  isActiveWorkspaceLoading: true
+  isActiveWorkspaceLoading: true,
+  activeWorkspaceMessages: [],
+  isActiveWorkspaceMessagesLoading: true,
+  isActiveWorkspaceMessagesError: false
 };
 
-export const getActiveWorkspaceTasks = createAsyncThunk<Task[]>(
-  "user/getActiveWorkspaceTasks",
-  async (_, thunkApi) => {
-    const activeWorkSpace = useAppSelector(
-      (state) => state.userSlice.activeWorkspace
-    );
+export const getActiveWorkspaceMessages = createAsyncThunk<Message[], number>(
+  "user/getActiveWorkspaceMessage",
+  async (id, thunkApi) => {
     const response = await fetch(
-      import.meta.env.VITE_APP_BACKEND_URL +
-        "/tasks/workspace/" +
-        activeWorkSpace,
+      import.meta.env.VITE_APP_BACKEND_URL + "/messages/" + id,
       {
         method: "GET",
         headers: {
@@ -48,6 +57,27 @@ export const getActiveWorkspaceTasks = createAsyncThunk<Task[]>(
         }
       }
     );
+
+    if (!response.ok) {
+      return thunkApi.rejectWithValue(await response.json());
+    }
+    return (await response.json()) as Message[];
+  }
+);
+
+export const getActiveWorkspaceTasks = createAsyncThunk<Task[], number>(
+  "user/getActiveWorkspaceTasks",
+  async (id, thunkApi) => {
+    const response = await fetch(
+      import.meta.env.VITE_APP_BACKEND_URL + "/tasks/workspace/" + id,
+      {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.getItem("accessToken")!
+        }
+      }
+    );
+
     if (!response.ok) {
       return thunkApi.rejectWithValue(await response.json());
     }
@@ -96,6 +126,7 @@ export const userSlice = createSlice({
       state.isUserLoading = false;
       state.userData = action.payload;
     });
+
     builder.addCase(getActiveWorkspaceTasks.pending, (state) => {
       state.isActiveWorkspaceLoading = true;
     });
@@ -108,6 +139,20 @@ export const userSlice = createSlice({
     builder.addCase(getActiveWorkspaceTasks.fulfilled, (state, action) => {
       state.isActiveWorkspaceLoading = false;
       state.activeWorkspaceTasks = action.payload;
+    });
+
+    builder.addCase(getActiveWorkspaceMessages.pending, (state) => {
+      state.isActiveWorkspaceMessagesLoading = true;
+    });
+
+    builder.addCase(getActiveWorkspaceMessages.rejected, (state) => {
+      state.isActiveWorkspaceMessagesError = true;
+      state.isActiveWorkspaceMessagesLoading = false;
+    });
+
+    builder.addCase(getActiveWorkspaceMessages.fulfilled, (state, action) => {
+      state.isActiveWorkspaceMessagesLoading = false;
+      state.activeWorkspaceMessages = action.payload;
     });
   }
 });
