@@ -30,8 +30,8 @@ export default function Login() {
 
   return (
     <div className="loggin-cont">
-      <div className="content-loggin-cont text-center">
-        <div className="loggin-header py-4">
+      <div className="content-loggin-cont">
+        <div className="loggin-header justify-content-center d-flex align-items-center py-4">
           <img src={taskfieldLogo} />
         </div>
         <Form
