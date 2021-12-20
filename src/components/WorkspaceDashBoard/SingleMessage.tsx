@@ -12,7 +12,7 @@ export default function SingleMessage({ messageData }: SingleMessageProps) {
   const isMyMessage = messageData.userId == clientUserId;
   return (
     <div>
-      {isMyMessage ? (
+      {!isMyMessage ? (
         <div className="myMessage">
           <div
             className="mb-2 d-flex align-items-center"
